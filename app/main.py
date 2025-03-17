@@ -45,6 +45,7 @@ class Dictionary:
         if not (node := self._hash_table[index]) or node.is_deleted:
             raise KeyError
         node.is_deleted = True
+        self._size -= 1
 
     def pop(self, *args) -> Any:
         if len(args) > 2:
@@ -65,7 +66,6 @@ class Dictionary:
             return default[0]
 
     def _resize(self) -> None:
-        print("risize called")
         current_hash_table = self._hash_table
         self.capacity = self.capacity * self.CAPACITY_MULTIPLIER
         self._hash_table = [None] * self.capacity
